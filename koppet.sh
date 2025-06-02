@@ -1,10 +1,10 @@
-for fullname in $KOPPET_ARTICLES_DIR/*.md; do
-    filename=$(basename "$fullname")
+for fullpath in $KOPPET_ARTICLES_DIR/*.md; do
+    filename=$(basename "$fullpath")
     name="${filename%.*}"
     echo "Converting '$name' to EPUB..."
-    pandoc "$fullname" -o "$TMPDIR/$name.epub"
+    pandoc "$fullpath" -o "$TMPDIR/$name.epub"
     echo "Converting '$name' to KEPUB..."
-    kepubify "$TMPDIR/$name.epub" -o "$TMPDIR/$name.kepub.epub" --no-add-dummy-titlepage > /dev/null
+    kepubify "$TMPDIR/$name.epub" -o "$TMPDIR/$name.kepub.epub" > /dev/null
     echo "Sending '$name' to Kobo..."
     cp "$TMPDIR/$name.kepub.epub" "/Volumes/NO NAME/Articles/$name.kepub.epub"
     echo "Cleaning up..."
