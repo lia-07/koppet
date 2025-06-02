@@ -2,7 +2,7 @@
 
 _(Pronounced "cop-it")_
 
-Send markdown files in a given directory to your Kobo device as optimised KePubs
+Send markdown files in a given directory to your Kobo device as optimised KePubs.
 
 **Warning:** This is _extremely_ unpolished. In its current form, Koppet is an MVP that suits my needs. In theory, it should work on both macOS and Linux, but I have only tested it on the former.
 

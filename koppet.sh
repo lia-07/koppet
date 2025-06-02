@@ -15,9 +15,12 @@ done
 for fullpath in $KOPPET_ARTICLES_DIR/*.md; do
     filename=$(basename "$fullpath")
     name="${filename%.*}"
-    echo "Converting '$name' to EPUB..."
+    if [ -e "$mount_path/Articles/$name.kepub.epub" ]; then
+      continue;
+    fi
+    echo "Converting '$name' to ePub.."
     pandoc "$fullpath" -o "$TMPDIR/$name.epub"
-    echo "Converting '$name' to KEPUB..."
+    echo "Converting '$name' to KePub..."
     # shut up kepubify
     kepubify "$TMPDIR/$name.epub" -o "$TMPDIR/$name.kepub.epub" > /dev/null
     echo "Sending '$name' to device..."
@@ -28,4 +31,4 @@ for fullpath in $KOPPET_ARTICLES_DIR/*.md; do
 done
 
 echo "Ejecting device now..."
-diskutil eject $disk_path > dev/null
+diskutil eject $disk_path > /dev/null
