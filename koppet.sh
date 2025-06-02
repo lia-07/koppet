@@ -1,0 +1,15 @@
+for fullname in $KOPPET_ARTICLES_DIR/*.md; do
+    filename=$(basename "$fullname")
+    name="${filename%.*}"
+    echo "Converting '$name' to EPUB..."
+    pandoc "$fullname" -o "$TMPDIR/$name.epub"
+    echo "Converting '$name' to KEPUB..."
+    kepubify "$TMPDIR/$name.epub" -o "$TMPDIR/$name.kepub.epub" --no-add-dummy-titlepage > /dev/null
+    echo "Sending '$name' to Kobo..."
+    cp "$TMPDIR/$name.kepub.epub" "/Volumes/NO NAME/Articles/$name.kepub.epub"
+    echo "Cleaning up..."
+    rm "$TMPDIR/$name.epub"
+    rm "$TMPDIR/$name.kepub.epub"
+done
+echo "Ejecting Kobo now..."
+diskutil eject /dev/disk8
