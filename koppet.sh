@@ -18,7 +18,7 @@ for fullpath in $KOPPET_ARTICLES_DIR/*.md; do
     if [ -e "$mount_path/Articles/$name.kepub.epub" ]; then
       continue;
     fi
-    echo "Converting '$name' to ePub.."
+    echo "Converting '$name' to ePub..."
     pandoc "$fullpath" -o "$TMPDIR/$name.epub"
     echo "Converting '$name' to KePub..."
     # shut up kepubify
